@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="taxTypeGSTBC" class="ca.bestbuy.taxapplication.entities.TaxTypeImpl">
+        <property name="name" value="GST"/>
+        <property name="value" value="5.0" />            
+    </bean>
+    
+    <bean id="taxTypePSTBC" class="ca.bestbuy.taxapplication.entities.TaxTypeImpl">
+        <property name="name" value="PST"/>
+        <property name="value" value="7.0" />            
+    </bean>
+    
+    <bean id="taxTypeGSTAB" class="ca.bestbuy.taxapplication.entities.TaxTypeImpl">
+        <property name="name" value="GST"/>
+        <property name="value" value="5.0" />            
+    </bean>
+    
+    <bean id="taxJurisdictionBC" class="ca.bestbuy.taxapplication.entities.TaxJurisdictionImpl">
+        <property name="name" value="BC"/>
+        <property name="taxTypes">
+            <list>
+                <ref bean="taxTypeGSTBC"/>
+                <ref bean="taxTypePSTBC" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="taxJurisdictionAB" class="ca.bestbuy.taxapplication.entities.TaxJurisdictionImpl">
+        <property name="name" value="AB"/>
+        <property name="taxTypes">
+            <list>
+                <ref bean="taxTypeGSTAB"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="taxRepository" class="ca.bestbuy.taxapplication.dao.TaxJurisdictionRepository">
+        <property name="jurisdictions">
+            <map>
+                <entry key="BC" value-ref="taxJurisdictionBC"/>
+                <entry key="AB" value-ref="taxJurisdictionAB"/>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="taxCalculationService" class="ca.bestbuy.taxapplication.service.TaxCalculationServiceImpl">
+        <property name="taxJurisdictionDao" ref="taxRepository">
+        </property>
+    </bean>
+</beans>
