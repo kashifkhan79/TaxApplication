@@ -11,7 +11,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.springframework.version>5.3.6</org.springframework.version>
+        <org.springframework.version>5.3.16</org.springframework.version>
         <start-class>ca.bestbuy.taxapplication.application.ApplicationLauncher</start-class>
     </properties>
     
